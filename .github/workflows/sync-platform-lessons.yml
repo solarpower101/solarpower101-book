@@ -1,0 +1,82 @@
+name: Sync Platform Lessons
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/content/docs/free/**"
+      - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/sync-platform-lessons.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      PLATFORM_REPOSITORY: ${{ vars.PLATFORM_REPOSITORY || 'solarpower101/solarpower101-platform' }}
+      PLATFORM_LESSON_INDEX_PATH: ${{ vars.PLATFORM_LESSON_INDEX_PATH || 'packages/domain/src/generated/solar-power-101.lesson-index.json' }}
+
+    steps:
+      - name: Checkout book
+        uses: actions/checkout@v4
+        with:
+          path: book
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: book/package-lock.json
+
+      - name: Install book dependencies
+        working-directory: book
+        run: npm ci
+
+      - name: Validate and export lesson index
+        working-directory: book
+        run: |
+          npm run validate
+          npm run export:public-index
+
+      - name: Checkout platform
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ vars.PLATFORM_REPOSITORY || 'solarpower101/solarpower101-platform' }}
+          token: ${{ secrets.PLATFORM_REPO_TOKEN }}
+          path: platform
+
+      - name: Copy generated lesson index
+        run: |
+          mkdir -p "platform/$(dirname "$PLATFORM_LESSON_INDEX_PATH")"
+          cp book/src/data/lesson-index.json "platform/$PLATFORM_LESSON_INDEX_PATH"
+
+      - name: Open platform pull request
+        working-directory: platform
+        env:
+          GH_TOKEN: ${{ secrets.PLATFORM_REPO_TOKEN }}
+        run: |
+          if git diff --quiet -- "$PLATFORM_LESSON_INDEX_PATH"; then
+            echo "No platform lesson manifest changes to sync."
+            exit 0
+          fi
+
+          branch="sync/book-lessons-${GITHUB_SHA}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add "$PLATFORM_LESSON_INDEX_PATH"
+          git commit -m "Sync SolarPower101 book lessons"
+          git push origin "$branch"
+
+          gh pr create \
+            --title "Sync SolarPower101 book lessons" \
+            --body "Generated from solarpower101-book commit ${GITHUB_SHA}." \
+            --base main \
+            --head "$branch"
