@@ -64,6 +64,7 @@ jobs:
 
       - name: Copy built book pages
         run: |
+          find book/dist -type f -name "*.js" -delete
           rm -rf "platform/$PLATFORM_BOOK_OUTPUT_PATH"
           mkdir -p "platform/$PLATFORM_BOOK_OUTPUT_PATH"
           cp -R book/dist/. "platform/$PLATFORM_BOOK_OUTPUT_PATH/"
