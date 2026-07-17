@@ -3,6 +3,7 @@ import path from "node:path";
 
 export const repoRoot = process.cwd();
 export const freeLessonsDir = path.join(repoRoot, "src", "content", "docs", "free");
+export const premiumWorkflowsDir = path.join(repoRoot, "src", "content", "docs", "premium");
 
 export const expectedLessonSlugs = [
   "solar-basics-for-homeowners",
@@ -12,6 +13,17 @@ export const expectedLessonSlugs = [
   "batteries-and-backup-power",
   "solar-maintenance-expectations",
   "choosing-a-solar-installer",
+];
+
+export const expectedPremiumWorkflowSlugs = [
+  "home-solar-readiness-assessment",
+  "utility-bill-deep-dive",
+  "quote-review-workbook",
+  "installer-comparison",
+  "financing-reality-check",
+  "battery-decision-guide",
+  "contract-and-pre-sign-checklist",
+  "installation-and-post-install-guide",
 ];
 
 export function parseFrontmatter(source, filePath) {
@@ -47,6 +59,18 @@ export function parseFrontmatter(source, filePath) {
 
 export async function readLesson(slug) {
   const filePath = path.join(freeLessonsDir, `${slug}.mdx`);
+  const source = await readFile(filePath, "utf8");
+  const parsed = parseFrontmatter(source, filePath);
+
+  return {
+    filePath,
+    source,
+    ...parsed,
+  };
+}
+
+export async function readPremiumWorkflow(slug) {
+  const filePath = path.join(premiumWorkflowsDir, `${slug}.mdx`);
   const source = await readFile(filePath, "utf8");
   const parsed = parseFrontmatter(source, filePath);
 

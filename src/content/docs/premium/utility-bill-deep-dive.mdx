@@ -1,0 +1,54 @@
+---
+title: Utility Bill Deep Dive
+slug: premium/utility-bill-deep-dive
+access: premium
+summary: Convert a confusing utility bill into solar planning inputs that can be checked against installer savings claims.
+category: premium-utility-bills
+last_verified_at: 2026-07-17
+---
+
+## Homeowner Scenario
+
+You have a recent electric bill and at least one installer has asked about usage, savings, or rate plans.
+
+## Required Inputs
+
+- Monthly kWh usage from the current bill.
+- Any available 12-month usage history.
+- Rate plan name, fixed charges, delivery charges, and time-of-use periods.
+- Net metering, export credit, or solar billing language if shown.
+- Notes about upcoming usage changes such as EV charging, heat pumps, or household size.
+
+## Decision Process
+
+1. Record the current month kWh and bill total separately.
+2. Add monthly usage into an annual usage estimate when 12 months are available.
+3. Identify fixed charges that solar may not offset.
+4. Mark time-of-use or export language that affects savings assumptions.
+5. Compare installer production and savings assumptions against the bill data.
+
+## Example Calculation
+
+If the bill history shows 9,600 kWh per year and a proposal assumes 12,400 kWh of usage, the installer should explain the difference. A future EV may justify higher usage, but the assumption should be explicit.
+
+## Red Flags
+
+- Savings are presented without annual usage.
+- Fixed charges are treated as avoidable energy charges.
+- The quote ignores time-of-use periods even though the bill names them.
+- Export credit assumptions are not documented.
+
+## Questions To Ask Installer
+
+- What annual usage number did you use?
+- Which utility rate plan did you model?
+- How did you treat fixed charges and export credits?
+- Does the model assume any future home electrification or EV charging?
+
+## Decision Output
+
+Create a bill input summary with annual usage, seasonal pattern, fixed-charge notes, rate-plan questions, and quote assumptions that require verification.
+
+## Premium Artifact
+
+Use a utility bill extraction guide that captures monthly kWh, annual usage, rate plan, fixed charges, export rules, and follow-up questions.

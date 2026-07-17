@@ -24,6 +24,10 @@ export default defineConfig({
           label: "Free Lessons",
           items: [{ autogenerate: { directory: "free" } }],
         },
+        {
+          label: "Premium Workflows",
+          items: [{ autogenerate: { directory: "premium" } }],
+        },
       ],
       customCss: ["./src/styles/custom.css"],
     }),

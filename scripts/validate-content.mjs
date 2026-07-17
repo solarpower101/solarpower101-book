@@ -1,10 +1,29 @@
 import { readdir } from "node:fs/promises";
 import path from "node:path";
 
-import { expectedLessonSlugs, freeLessonsDir, makeLessonIndexEntry, readLesson } from "./content-utils.mjs";
+import {
+  expectedLessonSlugs,
+  expectedPremiumWorkflowSlugs,
+  freeLessonsDir,
+  makeLessonIndexEntry,
+  premiumWorkflowsDir,
+  readLesson,
+  readPremiumWorkflow,
+} from "./content-utils.mjs";
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const premiumSlugPattern = /^premium\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const requiredFields = ["title", "slug", "access", "summary", "category", "last_verified_at"];
+const requiredPremiumSections = [
+  "## Homeowner Scenario",
+  "## Required Inputs",
+  "## Decision Process",
+  "## Example",
+  "## Red Flags",
+  "## Questions To Ask Installer",
+  "## Decision Output",
+  "## Premium Artifact",
+];
 const errors = [];
 
 const files = await readdir(freeLessonsDir);
@@ -72,6 +91,55 @@ for (const entry of entries) {
   seenSlugs.add(entry.slug);
 }
 
+const premiumFiles = await readdir(premiumWorkflowsDir);
+const premiumMdxFiles = premiumFiles.filter((file) => file.endsWith(".mdx")).sort();
+const actualPremiumSlugs = premiumMdxFiles.map((file) => path.basename(file, ".mdx"));
+
+for (const expectedSlug of expectedPremiumWorkflowSlugs) {
+  if (!actualPremiumSlugs.includes(expectedSlug)) {
+    errors.push(`Missing premium workflow file for ${expectedSlug}`);
+  }
+}
+
+for (const actualSlug of actualPremiumSlugs) {
+  if (!expectedPremiumWorkflowSlugs.includes(actualSlug)) {
+    errors.push(`Unexpected premium workflow file: ${actualSlug}.mdx`);
+  }
+}
+
+for (const slug of expectedPremiumWorkflowSlugs) {
+  const workflow = await readPremiumWorkflow(slug);
+  const { frontmatter, body, filePath } = workflow;
+
+  for (const field of requiredFields) {
+    if (!frontmatter[field]) {
+      errors.push(`${filePath} is missing required frontmatter field: ${field}`);
+    }
+  }
+
+  if (frontmatter.slug !== `premium/${slug}`) {
+    errors.push(`${filePath} slug frontmatter must be premium/${slug}`);
+  }
+
+  if (!premiumSlugPattern.test(frontmatter.slug ?? "")) {
+    errors.push(`${filePath} has invalid premium slug: ${frontmatter.slug}`);
+  }
+
+  if (frontmatter.access !== "premium") {
+    errors.push(`${filePath} must use access: premium`);
+  }
+
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(frontmatter.last_verified_at ?? "")) {
+    errors.push(`${filePath} must use YYYY-MM-DD last_verified_at`);
+  }
+
+  for (const section of requiredPremiumSections) {
+    if (!body.includes(section)) {
+      errors.push(`${filePath} is missing required premium section: ${section}`);
+    }
+  }
+}
+
 if (errors.length > 0) {
   console.error("Content validation failed:");
   for (const error of errors) {
@@ -80,4 +148,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${entries.length} public lessons.`);
+console.log(`Validated ${entries.length} public lessons and ${expectedPremiumWorkflowSlugs.length} premium workflows.`);
