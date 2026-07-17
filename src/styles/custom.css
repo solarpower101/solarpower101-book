@@ -1,0 +1,31 @@
+:root {
+  --sl-color-accent-low: #d8efe6;
+  --sl-color-accent: #0f766e;
+  --sl-color-accent-high: #0b4f49;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #f6faf7;
+  --sl-color-gray-2: #e8f0eb;
+  --sl-color-gray-3: #c9d8d0;
+  --sl-color-gray-4: #7d8a82;
+  --sl-color-gray-5: #4b5b51;
+  --sl-color-gray-6: #2c3831;
+  --sl-color-black: #18201b;
+}
+
+[data-theme="dark"] {
+  --sl-color-accent-low: #123a35;
+  --sl-color-accent: #61c7b6;
+  --sl-color-accent-high: #d8efe6;
+  --sl-color-white: #f6faf7;
+  --sl-color-gray-1: #e8f0eb;
+  --sl-color-gray-2: #c9d8d0;
+  --sl-color-gray-3: #9bad9f;
+  --sl-color-gray-4: #6f8076;
+  --sl-color-gray-5: #34443a;
+  --sl-color-gray-6: #202a25;
+  --sl-color-black: #121714;
+}
+
+.sl-markdown-content a[href^="https://solarpower101.github.io"] {
+  font-weight: 650;
+}
