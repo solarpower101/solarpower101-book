@@ -1,11 +1,22 @@
 [
   {
+    "slug": "why-solar-why-now",
+    "title": "Why Solar, Why Now",
+    "summary": "Connect electricity prices, solar costs, demand growth, and hotter weather to the practical timing question behind a home solar decision.",
+    "category": "energy-outlook",
+    "access": "free",
+    "lastVerifiedAt": "2026-07-18",
+    "bookPath": "/book/why-solar-why-now/",
+    "platformPath": "/learn/why-solar-why-now/",
+    "platformUrl": "https://solarpower101.github.io/learn/why-solar-why-now/"
+  },
+  {
     "slug": "solar-basics-for-homeowners",
     "title": "Solar Basics for Homeowners",
     "summary": "Learn what rooftop solar equipment does, how power moves through the home, and which questions to ask before requesting a quote.",
     "category": "basics",
     "access": "free",
-    "lastVerifiedAt": "2026-07-17",
+    "lastVerifiedAt": "2026-07-18",
     "bookPath": "/book/solar-basics-for-homeowners/",
     "platformPath": "/learn/solar-basics-for-homeowners/",
     "platformUrl": "https://solarpower101.github.io/learn/solar-basics-for-homeowners/"
@@ -13,10 +24,10 @@
   {
     "slug": "roof-and-property-readiness",
     "title": "Check Roof and Property Readiness",
-    "summary": "Review roof age, shade, available space, and ownership details so a quote conversation starts with the right context.",
+    "summary": "Check roof age, shade, space, and approvals before comparing solar quotes.",
     "category": "roof-readiness",
     "access": "free",
-    "lastVerifiedAt": "2026-07-17",
+    "lastVerifiedAt": "2026-07-18",
     "bookPath": "/book/roof-and-property-readiness/",
     "platformPath": "/learn/roof-and-property-readiness/",
     "platformUrl": "https://solarpower101.github.io/learn/roof-and-property-readiness/"
@@ -24,10 +35,10 @@
   {
     "slug": "understand-your-utility-bill",
     "title": "Understand Your Utility Bill",
-    "summary": "Use your bill to find monthly usage, rate structure clues, and seasonal patterns that shape a practical solar conversation.",
+    "summary": "Use your bill to find usage, rate clues, and seasonal patterns before comparing solar quotes.",
     "category": "utility-bills",
     "access": "free",
-    "lastVerifiedAt": "2026-07-17",
+    "lastVerifiedAt": "2026-07-18",
     "bookPath": "/book/understand-your-utility-bill/",
     "platformPath": "/learn/understand-your-utility-bill/",
     "platformUrl": "https://solarpower101.github.io/learn/understand-your-utility-bill/"
@@ -38,7 +49,7 @@
     "summary": "Understand the kinds of solar incentives that may exist without treating them as guaranteed tax, legal, or financial advice.",
     "category": "incentives",
     "access": "free",
-    "lastVerifiedAt": "2026-07-17",
+    "lastVerifiedAt": "2026-07-18",
     "bookPath": "/book/incentives-without-the-jargon/",
     "platformPath": "/learn/incentives-without-the-jargon/",
     "platformUrl": "https://solarpower101.github.io/learn/incentives-without-the-jargon/"
@@ -49,7 +60,7 @@
     "summary": "Decide whether batteries match your outage needs, critical loads, budget expectations, and local utility rules.",
     "category": "batteries",
     "access": "free",
-    "lastVerifiedAt": "2026-07-17",
+    "lastVerifiedAt": "2026-07-18",
     "bookPath": "/book/batteries-and-backup-power/",
     "platformPath": "/learn/batteries-and-backup-power/",
     "platformUrl": "https://solarpower101.github.io/learn/batteries-and-backup-power/"
@@ -57,10 +68,10 @@
   {
     "slug": "solar-maintenance-expectations",
     "title": "Solar Maintenance Expectations",
-    "summary": "Set realistic expectations for monitoring, cleaning, warranties, and what to do when production looks unusual.",
+    "summary": "Know what to monitor, what to keep, and who to call when production looks unusual.",
     "category": "maintenance",
     "access": "free",
-    "lastVerifiedAt": "2026-07-17",
+    "lastVerifiedAt": "2026-07-18",
     "bookPath": "/book/solar-maintenance-expectations/",
     "platformPath": "/learn/solar-maintenance-expectations/",
     "platformUrl": "https://solarpower101.github.io/learn/solar-maintenance-expectations/"
@@ -71,7 +82,7 @@
     "summary": "Compare installers with practical questions about licensing, design assumptions, equipment, warranties, and communication.",
     "category": "choosing-installer",
     "access": "free",
-    "lastVerifiedAt": "2026-07-17",
+    "lastVerifiedAt": "2026-07-18",
     "bookPath": "/book/choosing-a-solar-installer/",
     "platformPath": "/learn/choosing-a-solar-installer/",
     "platformUrl": "https://solarpower101.github.io/learn/choosing-a-solar-installer/"

@@ -593,10 +593,437 @@ footer p {
   display: none;
 }
 
+.energy-outlook {
+  display: grid;
+  gap: 1rem;
+  margin: 1.75rem 0 2.25rem;
+}
+
+.outlook-toolbar {
+  align-items: stretch;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.outlook-toolbar button {
+  align-items: center;
+  appearance: none;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  box-sizing: border-box;
+  color: var(--muted);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 800;
+  height: 2.75rem;
+  justify-content: center;
+  line-height: 1.1;
+  margin: 0;
+  padding: 0.55rem 0.8rem;
+  text-align: center;
+  transition:
+    background 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.outlook-toolbar button:hover {
+  border-color: var(--teal);
+  color: var(--teal-dark);
+}
+
+.outlook-toolbar button[aria-pressed="true"] {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--surface);
+}
+
+.outlook-grid {
+  align-items: stretch;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+.outlook-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+  display: grid;
+  gap: 0.85rem;
+  min-width: 0;
+  padding: 1rem;
+}
+
+.reveal-ready .outlook-panel.is-visible,
+.reveal-ready .impact-card.is-visible,
+.reveal-ready .journey-step.is-visible,
+.reveal-ready .flow-node.is-visible,
+.reveal-ready .field-note.is-visible,
+.reveal-ready .decision-lab.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.outlook-chart-header {
+  align-items: start;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.outlook-chart-header strong,
+.impact-panel > strong {
+  color: var(--ink);
+}
+
+.outlook-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.75rem;
+  justify-content: flex-end;
+}
+
+.outlook-legend-item {
+  align-items: center;
+  color: var(--muted);
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 0.35rem;
+  line-height: 1.2;
+}
+
+.outlook-legend-item span {
+  background: var(--legend-color);
+  border-radius: 999px;
+  display: inline-block;
+  height: 0.62rem;
+  width: 0.62rem;
+}
+
+.outlook-chart {
+  aspect-ratio: 740 / 350;
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--teal-soft) 40%, transparent), transparent 48%),
+    var(--surface-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  min-height: 16rem;
+  overflow: hidden;
+}
+
+.outlook-svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.outlook-gridline {
+  opacity: 0.85;
+}
+
+.outlook-axis-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.outlook-line-path {
+  animation: draw-outlook-line 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  filter: drop-shadow(0 8px 10px rgba(15, 118, 110, 0.12));
+  stroke-dasharray: 780;
+  stroke-dashoffset: 780;
+}
+
+.outlook-demand-range {
+  animation: grow-demand-range 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  opacity: 0.35;
+}
+
+.outlook-dot {
+  animation: pop-dot 440ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.outlook-area {
+  animation: fade-in-area 900ms ease both;
+}
+
+.outlook-band {
+  animation: fade-in-area 900ms ease both;
+}
+
+.outlook-overlay {
+  cursor: crosshair;
+}
+
+.outlook-guide {
+  pointer-events: none;
+  stroke: var(--teal);
+  stroke-dasharray: 3 5;
+  stroke-width: 1.4;
+  transition: opacity 140ms ease;
+}
+
+.outlook-marker {
+  filter: drop-shadow(0 4px 8px rgba(15, 118, 110, 0.28));
+  pointer-events: none;
+  transition: opacity 140ms ease;
+}
+
+.outlook-flyout {
+  pointer-events: none;
+  transition: opacity 140ms ease;
+}
+
+.outlook-flyout-bg {
+  fill: var(--surface);
+  filter: drop-shadow(0 12px 24px rgba(24, 40, 35, 0.22));
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+
+.outlook-flyout-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.outlook-flyout-title {
+  fill: var(--muted);
+  font-weight: 800;
+}
+
+.outlook-flyout-mark {
+  font-size: 0.72rem;
+}
+
+.outlook-end-pill {
+  opacity: 0.94;
+}
+
+.outlook-end-text {
+  fill: var(--surface);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.outlook-key-target {
+  outline: none;
+  /* Keyboard-focusable only; the pointer crosshair overlay handles mouse hover. */
+  pointer-events: none;
+}
+
+.outlook-key-target:focus-visible {
+  fill: color-mix(in oklab, var(--teal) 12%, transparent);
+  stroke: var(--teal);
+  stroke-dasharray: 3 4;
+  stroke-width: 1.4;
+}
+
+.outlook-source,
+.outlook-footnotes,
+.impact-panel p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.impact-panel {
+  align-content: start;
+}
+
+.impact-controls {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.impact-controls label {
+  color: var(--muted);
+  display: grid;
+  font-weight: 800;
+  gap: 0.35rem;
+  margin: 0;
+}
+
+.impact-controls input[type="range"] {
+  accent-color: var(--teal);
+  width: 100%;
+}
+
+.impact-controls span {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.impact-bar {
+  --offset-share: 60%;
+  background: var(--surface-sunk);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  height: 0.85rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.impact-bar-fill {
+  background: linear-gradient(90deg, var(--teal), color-mix(in oklab, var(--teal) 62%, var(--sun)));
+  border-radius: 999px;
+  display: block;
+  height: 100%;
+  transition: width 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  width: var(--offset-share);
+}
+
+.impact-cards {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.impact-card {
+  background: var(--surface-sunk);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  display: grid;
+  gap: 0.18rem;
+  padding: 0.75rem;
+}
+
+.impact-card.is-positive {
+  background: color-mix(in oklab, var(--teal-soft) 70%, var(--surface));
+  border-color: color-mix(in oklab, var(--teal) 30%, var(--line));
+}
+
+.impact-card.is-positive strong {
+  color: var(--teal-dark);
+}
+
+.impact-rate {
+  font-size: 0.82rem !important;
+}
+
+.impact-card span {
+  color: var(--subtle);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.impact-card strong {
+  color: var(--ink);
+  font-size: 1.18rem;
+}
+
+.outlook-footnotes {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.reveal-ready .outlook-panel,
+.reveal-ready .impact-card,
+.reveal-ready .journey-step,
+.reveal-ready .flow-node,
+.reveal-ready .field-note,
+.reveal-ready .decision-lab {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 520ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes draw-outlook-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes grow-demand-range {
+  from {
+    opacity: 0;
+    stroke-width: 2;
+  }
+
+  to {
+    opacity: 0.35;
+    stroke-width: 18;
+  }
+}
+
+@keyframes pop-dot {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in-area {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outlook-toolbar button,
+  .outlook-panel,
+  .impact-card,
+  .journey-step,
+  .flow-node,
+  .field-note,
+  .outlook-line-path,
+  .outlook-demand-range,
+  .outlook-dot,
+  .outlook-area,
+  .outlook-band,
+  .impact-bar-fill {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .outlook-line-path {
+    stroke-dashoffset: 0;
+  }
+}
+
 @media (max-width: 760px) {
   .solar-flow,
   .visual-key,
-  .slider-grid {
+  .slider-grid,
+  .outlook-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .outlook-chart-header {
+    display: grid;
+  }
+
+  .outlook-toolbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .outlook-legend {
+    justify-content: flex-start;
+  }
+
+  .impact-cards {
     grid-template-columns: 1fr;
   }
 

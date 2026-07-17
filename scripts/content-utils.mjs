@@ -6,6 +6,7 @@ export const freeLessonsDir = path.join(repoRoot, "src", "content", "docs", "fre
 export const premiumWorkflowsDir = path.join(repoRoot, "src", "content", "docs", "premium");
 
 export const expectedLessonSlugs = [
+  "why-solar-why-now",
   "solar-basics-for-homeowners",
   "roof-and-property-readiness",
   "understand-your-utility-bill",
