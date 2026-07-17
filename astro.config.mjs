@@ -8,6 +8,7 @@ export default defineConfig({
     starlight({
       title: "SolarPower101 Academy",
       description: "Public homeowner solar education that complements SolarPower101 Learn.",
+      pagefind: false,
       social: [
         {
           icon: "github",
