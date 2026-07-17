@@ -23,7 +23,7 @@ jobs:
     env:
       PLATFORM_REPOSITORY: ${{ vars.PLATFORM_REPOSITORY || 'solarpower101/solarpower101-platform' }}
       PLATFORM_LESSON_INDEX_PATH: ${{ vars.PLATFORM_LESSON_INDEX_PATH || 'packages/domain/src/generated/solar-power-101.lesson-index.json' }}
-      PLATFORM_BOOK_OUTPUT_PATH: ${{ vars.PLATFORM_BOOK_OUTPUT_PATH || 'public/book' }}
+      PLATFORM_BOOK_OUTPUT_PATH: ${{ vars.PLATFORM_BOOK_OUTPUT_PATH || 'apps/web/public/book' }}
 
     steps:
       - name: Checkout book
