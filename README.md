@@ -17,9 +17,11 @@ uses this repo through an exported manifest. The platform should treat `/learn/`
 ```sh
 npm run validate
 npm run export:public-index
+npm run build
 ```
 
 `npm run export:public-index` writes `src/data/lesson-index.json`.
+`npm run build` writes the static book site to `dist/`. The site is configured with `base: "/book"` so the generated pages are intended to be served by the platform at `https://solarpower101.github.io/book/`.
 
 ## Integration Contract
 
@@ -37,14 +39,15 @@ The exported manifest is the only data the platform should consume directly. Ful
 
 ## GitHub Sync
 
-This repository syncs its public lesson manifest into `solarpower101-platform` with GitHub Actions:
+This repository syncs its public lesson manifest and built public book pages into `solarpower101-platform` with GitHub Actions:
 
 ```txt
 solarpower101-book
-  -> validate and export src/data/lesson-index.json
+  -> validate, export src/data/lesson-index.json, and build dist/
+  -> temporarily remove premium MDX before the public static build
   -> open a PR against solarpower101-platform
   -> platform PR checks verify the generated data
-  -> platform deploy publishes solarpower101.github.io
+  -> platform deploy publishes solarpower101.github.io/book/
 ```
 
 Required GitHub Actions configuration for this repo:
@@ -53,15 +56,17 @@ Required GitHub Actions configuration for this repo:
 | --- | --- | --- |
 | `PLATFORM_REPOSITORY` | variable | `solarpower101/solarpower101-platform` |
 | `PLATFORM_LESSON_INDEX_PATH` | variable | `packages/domain/src/generated/solar-power-101.lesson-index.json` |
+| `PLATFORM_BOOK_OUTPUT_PATH` | variable | `public/book` |
 | `PLATFORM_REPO_TOKEN` | secret | fine-grained personal access token that grants this workflow write access to `solarpower101-platform` |
 
-The workflow also has defaults for the two variables, but setting them in GitHub keeps the destination explicit.
+The workflow also has defaults for the variables, but setting them in GitHub keeps the destination explicit.
 
 Configure the variables with `gh`:
 
 ```sh
 gh variable set PLATFORM_REPOSITORY --body solarpower101/solarpower101-platform
 gh variable set PLATFORM_LESSON_INDEX_PATH --body packages/domain/src/generated/solar-power-101.lesson-index.json
+gh variable set PLATFORM_BOOK_OUTPUT_PATH --body public/book
 ```
 
 Configure the secret with a token value:
@@ -75,4 +80,5 @@ gh secret set PLATFORM_REPO_TOKEN
 - `Contents: Read and write`
 - `Pull requests: Read and write`
 
-The token lets the workflow check out `solarpower101-platform`, create a sync branch, commit the generated lesson manifest, push the branch, and open a pull request.
+The token lets the workflow check out `solarpower101-platform`, create a sync branch, commit the generated lesson manifest and public book build, push the branch, and open a pull request.
+The same workflow also replaces the configured platform book output directory with this repo's public-only `dist/` contents. The default assumes the platform deploys static assets from `public/`, so `public/book` becomes available at `/book/`. Premium MDX remains authored in this repository, but the workflow removes it before the public build so premium content does not appear in generated pages, search indexes, or sitemaps. Premium workflows should be rendered only by an entitlement-gated product route.
