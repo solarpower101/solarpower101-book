@@ -21,6 +21,7 @@ export default defineConfig({
           label: "Start Here",
           items: [
             { label: "Academy Home", slug: "index" },
+            { label: "Homeowner FAQs", slug: "homeowner-faqs" },
             { label: "Solar Glossary", slug: "solar-glossary" },
           ],
         },

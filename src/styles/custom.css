@@ -384,3 +384,226 @@ footer,
 footer p {
   color: var(--muted);
 }
+
+.journey-map,
+.decision-lab,
+.homeowner-checklist,
+.quote-comparison,
+.field-note {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+}
+
+.journey-map {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.journey-step {
+  align-items: start;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: auto 1fr;
+  padding: 1rem;
+}
+
+.journey-step strong,
+.field-note strong,
+.visual-key strong,
+.decision-output strong {
+  color: var(--ink);
+}
+
+.step-number {
+  align-items: center;
+  background: var(--teal-soft);
+  border: 1px solid color-mix(in oklab, var(--teal) 30%, var(--line));
+  border-radius: 999px;
+  color: var(--teal-dark);
+  display: inline-flex;
+  font-weight: 800;
+  height: 2rem;
+  justify-content: center;
+  line-height: 1;
+  width: 2rem;
+}
+
+.decision-lab {
+  display: grid;
+  gap: 1rem;
+}
+
+.solar-flow {
+  align-items: stretch;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: 0.5rem;
+}
+
+.flow-node {
+  background: var(--surface-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  min-height: 6.25rem;
+  padding: 0.85rem;
+  position: relative;
+}
+
+.flow-node::after {
+  color: var(--sun-deep);
+  content: ">";
+  font-weight: 900;
+  position: absolute;
+  right: -0.55rem;
+  top: 42%;
+}
+
+.flow-node:last-child::after {
+  content: "";
+}
+
+.flow-node span {
+  color: var(--subtle);
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.visual-key {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.visual-key > div {
+  background: var(--surface-sunk);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem;
+}
+
+.homeowner-checklist label,
+.decision-lab label {
+  align-items: start;
+  color: var(--muted);
+  display: flex;
+  gap: 0.65rem;
+  margin: 0.65rem 0;
+}
+
+.homeowner-checklist input[type="checkbox"] {
+  accent-color: var(--teal);
+  flex: none;
+  margin-top: 0.25rem;
+}
+
+.slider-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.slider-grid input[type="range"] {
+  accent-color: var(--teal);
+  width: 100%;
+}
+
+.decision-output {
+  background: var(--teal-soft);
+  border: 1px solid color-mix(in oklab, var(--teal) 28%, var(--line));
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+}
+
+.quote-comparison {
+  overflow-x: auto;
+}
+
+.quote-comparison table {
+  border-collapse: collapse;
+  min-width: 42rem;
+  width: 100%;
+}
+
+.quote-comparison th,
+.quote-comparison td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.quote-comparison th {
+  color: var(--ink);
+}
+
+.field-note {
+  background: var(--surface-warm);
+}
+
+.glossary-search {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  display: grid;
+  gap: 0.65rem;
+  margin: 1.5rem 0 2rem;
+  padding: 1rem;
+}
+
+.glossary-search label {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.glossary-search input {
+  background: var(--surface-warm);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  font: inherit;
+  min-height: 3rem;
+  padding: 0.75rem 0.9rem;
+  width: 100%;
+}
+
+.glossary-search input::placeholder {
+  color: var(--subtle);
+}
+
+.glossary-search p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.glossary-term-hidden,
+.glossary-section-hidden {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .solar-flow,
+  .visual-key,
+  .slider-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-node::after {
+    bottom: -1rem;
+    content: "v";
+    right: 50%;
+    top: auto;
+  }
+}
