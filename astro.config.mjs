@@ -19,7 +19,10 @@ export default defineConfig({
       sidebar: [
         {
           label: "Start Here",
-          items: [{ label: "Academy Home", slug: "index" }],
+          items: [
+            { label: "Academy Home", slug: "index" },
+            { label: "Solar Glossary", slug: "solar-glossary" },
+          ],
         },
         {
           label: "Free Lessons",

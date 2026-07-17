@@ -45,9 +45,35 @@ This repository syncs its public lesson manifest and built public book pages int
 solarpower101-book
   -> validate, export src/data/lesson-index.json, and build dist/
   -> temporarily remove premium MDX before the public static build
+  -> remove generated client-side JS from the platform copy
   -> open a PR against solarpower101-platform
   -> platform PR checks verify the generated data
   -> platform deploy publishes solarpower101.github.io/book/
+```
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant Book as solarpower101-book
+  participant BookActions as Book GitHub Actions
+  participant Platform as solarpower101-platform
+  participant PlatformActions as Platform GitHub Actions
+  participant PublicSite as solarpower101.github.io
+
+  Book->>BookActions: Push to main
+  BookActions->>BookActions: Validate content
+  BookActions->>BookActions: Export lesson-index.json
+  BookActions->>BookActions: Move premium MDX out of public build
+  BookActions->>BookActions: Build Astro static book
+  BookActions->>BookActions: Remove generated JS from platform artifact
+  BookActions->>Platform: Open PR with lesson manifest and apps/web/public/book
+  Platform->>PlatformActions: Run PR checks
+  PlatformActions-->>Platform: Lint, typecheck, tests, static export validation
+  Platform->>Platform: Merge PR to main
+  Platform->>PlatformActions: Deploy Web workflow
+  PlatformActions->>PlatformActions: Build apps/web/out
+  PlatformActions->>PublicSite: Push generated static site
+  PublicSite-->>Book: /book/{slug}/ is live
 ```
 
 Required GitHub Actions configuration for this repo:
