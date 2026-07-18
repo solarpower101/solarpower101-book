@@ -442,41 +442,122 @@ footer p {
 .solar-flow {
   align-items: stretch;
   display: grid;
-  gap: 0.75rem;
+  gap: 1.25rem;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  margin-top: 0.5rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .solar-flow {
+    grid-template-columns: 1fr;
+  }
 }
 
 .flow-node {
   background: var(--surface-warm);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  min-height: 6.25rem;
-  padding: 0.85rem;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 1.25rem;
   position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.flow-node:hover {
+  transform: translateY(-4px);
+  border-color: var(--teal);
+  box-shadow: 0 8px 24px rgba(20, 110, 120, 0.08);
 }
 
 .flow-node::after {
-  color: var(--sun-deep);
-  content: ">";
+  content: "→";
+  color: var(--teal);
   font-weight: 900;
+  font-size: 1.4rem;
   position: absolute;
-  right: -0.55rem;
-  top: 42%;
+  right: -0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  opacity: 0.65;
+  transition: opacity 0.25s;
+}
+
+@media (max-width: 768px) {
+  .flow-node::after {
+    content: "↓";
+    right: 50%;
+    bottom: -1rem;
+    top: auto;
+    transform: translateX(50%);
+  }
 }
 
 .flow-node:last-child::after {
-  content: "";
+  content: "" !important;
+}
+
+.flow-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  stroke-width: 1.75;
+  padding: 0.4rem;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.flow-node:hover .flow-icon {
+  transform: scale(1.1) rotate(4deg);
+}
+
+/* Sunlight colors */
+.flow-sun {
+  color: #d97706;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+}
+/* Panels colors */
+.flow-panel {
+  color: #2563eb;
+  background: #dbeafe;
+  border: 1px solid #bfdbfe;
+}
+/* Inverter colors */
+.flow-inverter {
+  color: #7c3aed;
+  background: #ede9fe;
+  border: 1px solid #ddd6fe;
+}
+/* Home colors */
+.flow-home {
+  color: #059669;
+  background: #d1fae5;
+  border: 1px solid #a7f3d0;
+}
+/* Grid colors */
+.flow-grid {
+  color: #4b5563;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
 }
 
 .flow-node span {
-  color: var(--subtle);
-  display: block;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  margin-bottom: 0.35rem;
-  text-transform: uppercase;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 750;
+  letter-spacing: normal;
+  text-transform: none;
+  margin-bottom: 0;
+}
+
+.flow-node p {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin: 0;
 }
 
 .visual-key {

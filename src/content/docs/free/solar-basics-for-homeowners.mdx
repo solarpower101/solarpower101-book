@@ -69,13 +69,48 @@ Do not try to become an engineer overnight. Make the quote explain itself: what 
 Panels turn sunlight into DC power. An inverter converts that power into AC electricity that the home can use, and the utility meter records the exchange with the grid.
 
 <div class="decision-lab" aria-label="Solar energy flow visual">
-  <strong>Visual: how rooftop solar connects to the home</strong>
   <div class="solar-flow">
-    <div class="flow-node"><span>Sunlight</span>Available light changes by season, weather, shade, and roof direction.</div>
-    <div class="flow-node"><span>Panels</span>Panels make DC electricity when light reaches the cells.</div>
-    <div class="flow-node"><span>Inverter</span>The inverter changes DC electricity into home-ready AC electricity.</div>
-    <div class="flow-node"><span>Home</span>Your appliances use solar power first when production and demand happen at the same time.</div>
-    <div class="flow-node"><span>Grid</span>The meter tracks imports and exports under your utility's rules.</div>
+    <div class="flow-node">
+      <svg viewBox="0 0 24 24" class="flow-icon flow-sun" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+      </svg>
+      <span>Sunlight</span>
+      <p>Available light changes by season, weather, shade, and roof direction.</p>
+    </div>
+    <div class="flow-node">
+      <svg viewBox="0 0 24 24" class="flow-icon flow-panel" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <path d="M3 12h18M12 3v18M7 3l10 18M17 3L7 18"/>
+      </svg>
+      <span>Panels</span>
+      <p>Panels turn light into raw DC electricity when sunlight hits the solar cells.</p>
+    </div>
+    <div class="flow-node">
+      <svg viewBox="0 0 24 24" class="flow-icon flow-inverter" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="4" y="4" width="16" height="16" rx="2"/>
+        <path d="M7 9h4M7 11h4"/>
+        <path d="M13 10c1-2 2-2 3 0s2 2 3 0" stroke-linecap="round"/>
+        <path d="M12 7v10" stroke-dasharray="2 2"/>
+      </svg>
+      <span>Inverter</span>
+      <p>The inverter converts DC power into standard AC electricity that the home uses.</p>
+    </div>
+    <div class="flow-node">
+      <svg viewBox="0 0 24 24" class="flow-icon flow-home" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <span>Home</span>
+      <p>Your appliances use solar power first when generation matches electricity demand.</p>
+    </div>
+    <div class="flow-node">
+      <svg viewBox="0 0 24 24" class="flow-icon flow-grid" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2v20M17 5H7M21 9H3M19 15H5M12 2L4 22M12 2l8 20"/>
+      </svg>
+      <span>Grid</span>
+      <p>The utility meter tracks excess solar sent to the grid and power imported at night.</p>
+    </div>
   </div>
 </div>
 
