@@ -1,0 +1,17 @@
+---
+// Gated CTA shown under the free Readiness Lab snapshot. Kept in a component (not inlined in
+// the lesson MDX) so the public lesson body stays free of premium/CTA markup — the same
+// convention PremiumTeaser follows and the content validator enforces.
+import { premiumCtaUrl } from "../data/premium-pairings.mjs";
+
+const href = premiumCtaUrl("home-solar-readiness-assessment");
+---
+
+<p class="readiness-gate">
+  This is a free snapshot. The <strong>Home Solar Readiness Assessment</strong> scores your
+  roof, shade, space, and main-panel headroom against real thresholds — and turns this number
+  into a defensible go / fix-first / not-yet decision.
+</p>
+<a class="premium-teaser__cta" href={href}>
+  Unlock the full assessment <span aria-hidden="true">→</span>
+</a>

@@ -671,6 +671,69 @@ footer p {
   padding: 1rem;
 }
 
+.readiness-score {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.readiness-score__value {
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.readiness-score__max {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.readiness-score__band {
+  align-self: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.readiness-score__band[data-tone="good"] {
+  background: color-mix(in oklab, var(--teal) 22%, transparent);
+  color: var(--teal-dark);
+  border-color: color-mix(in oklab, var(--teal) 40%, transparent);
+}
+
+.readiness-score__band[data-tone="mid"] {
+  background: color-mix(in oklab, #b8860b 18%, transparent);
+  color: #7a5c00;
+  border-color: color-mix(in oklab, #b8860b 36%, transparent);
+}
+
+.readiness-score__band[data-tone="low"] {
+  background: color-mix(in oklab, var(--muted) 18%, transparent);
+  color: var(--muted);
+  border-color: color-mix(in oklab, var(--muted) 34%, transparent);
+}
+
+.readiness-score__band[data-tone="warn"] {
+  background: color-mix(in oklab, #c0392b 16%, transparent);
+  color: #a02c1d;
+  border-color: color-mix(in oklab, #c0392b 34%, transparent);
+}
+
+.readiness-gate {
+  margin: 0.85rem 0 0.75rem;
+  color: var(--muted);
+  font-size: var(--sl-text-base);
+}
+
 .quote-comparison {
   overflow-x: auto;
 }

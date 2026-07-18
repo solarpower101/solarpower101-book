@@ -130,3 +130,6 @@ gh secret set PLATFORM_REPO_TOKEN
 
 The token lets the workflow check out `solarpower101-platform`, create a sync branch, commit the generated lesson manifest and public book build, push the branch, and open a pull request.
 The same workflow also replaces the configured platform book output directory with this repo's public-only `dist/` contents. The default assumes the platform deploys the Next.js app in `apps/web`, so `apps/web/public/book` is copied into the static export and becomes available at `/book/`. Premium MDX remains authored in this repository, but the workflow removes it before the public build so premium content does not appear in generated pages, search indexes, or sitemaps. Premium workflows should be rendered only by an entitlement-gated product route.
+
+## References
+* DIY: https://www.youtube.com/playlist?list=PL7bvIB2TPsChaaGyPfBbk-txxXqe82PK5

@@ -11,6 +11,8 @@ sidebar:
 
 import SolarReadinessScript from "../../../components/SolarReadinessScript.astro";
 import PremiumTeaser from "../../../components/PremiumTeaser.astro";
+import ChecklistScript from "../../../components/ChecklistScript.astro";
+import ReadinessGate from "../../../components/ReadinessGate.astro";
 
 Solar sales often start with a monthly payment or claimed savings. Use a better path: learn what the system does, check the home, collect the right inputs, then compare quotes with the same assumptions.
 
@@ -175,8 +177,13 @@ Select the options that match your situation. This is not a quote or engineering
     </div>
   </div>
   <div class="decision-output" aria-live="polite">
+    <div class="readiness-score">
+      <span class="readiness-score__value"><span id="readiness-score">—</span><span class="readiness-score__max">/100</span></span>
+      <span class="readiness-score__band" id="readiness-band" data-tone="mid">Readiness snapshot</span>
+    </div>
     <strong id="readiness-title">Next focus: collect your bill and roof details.</strong>
     <p id="readiness-copy">You are in the early learning stage. Gather one bill, roof photos, main panel photos, and your main goal before requesting quotes.</p>
+    <ReadinessGate />
   </div>
 </div>
 
@@ -289,3 +296,5 @@ Prefer a guided walkthrough? Read [Solar Basics for Homeowners](https://solarpow
 />
 
 <SolarReadinessScript />
+
+<ChecklistScript />
