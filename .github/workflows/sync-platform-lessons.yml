@@ -99,4 +99,4 @@ jobs:
             --title "Sync SolarPower101 book content" \
             --body "Generated from solarpower101-book commit ${GITHUB_SHA}. Includes the public lesson manifest and built /book pages." \
             --base main \
-            --head "$branch"
+            --head "$branch" || true
