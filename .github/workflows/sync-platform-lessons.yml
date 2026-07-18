@@ -93,7 +93,7 @@ jobs:
           fi
 
           git commit -m "Sync SolarPower101 book content"
-          git push origin "$branch"
+          git push -f origin "$branch"
 
           gh pr create \
             --title "Sync SolarPower101 book content" \
