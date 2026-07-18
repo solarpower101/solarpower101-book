@@ -10,6 +10,19 @@
 
 export const PREMIUM_CTA_URL = "https://solarpower101.github.io/learn/premium/";
 
+// Build the CTA destination for one specific workbook. Every "Unlock" surface routes through
+// this so the destination stays single-sourced (PREMIUM_CTA_URL) while still telling the
+// platform which workbook the reader chose. The `?workbook=` param is safe to ignore: a
+// platform serving one central pricing page still works, and one that has per-workbook
+// content can deep-link. Returns the bare page when no slug is given.
+export function premiumCtaUrl(workbookSlug) {
+  if (!workbookSlug) {
+    return PREMIUM_CTA_URL;
+  }
+
+  return `${PREMIUM_CTA_URL}?workbook=${encodeURIComponent(workbookSlug)}`;
+}
+
 export const premiumPairings = {
   "understand-your-utility-bill": {
     workbookSlug: "utility-bill-deep-dive",
@@ -53,6 +66,17 @@ export const premiumPairings = {
   },
 };
 
+// Resolve a workbook slug from its display title. Lets the in-chapter <PremiumTeaser>, which
+// already authors the workbook title inline, deep-link its CTA without every chapter also
+// repeating the slug. Returns null for an unknown title.
+const workbookSlugByTitle = Object.fromEntries(
+  Object.values(premiumPairings).map((p) => [p.workbookTitle, p.workbookSlug]),
+);
+
+export function workbookSlugForTitle(workbookTitle) {
+  return workbookSlugByTitle[workbookTitle] ?? null;
+}
+
 // Build the catalog-level teaser object for a free lesson's manifest entry.
 // Returns null for a lesson with no configured pairing.
 export function makePremiumTeaser(freeSlug) {
@@ -65,6 +89,6 @@ export function makePremiumTeaser(freeSlug) {
     workbookTitle: pairing.workbookTitle,
     workbookSlug: `premium/${pairing.workbookSlug}`,
     benefit: pairing.benefit,
-    ctaUrl: PREMIUM_CTA_URL,
+    ctaUrl: premiumCtaUrl(pairing.workbookSlug),
   };
 }

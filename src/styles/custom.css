@@ -1280,6 +1280,65 @@ footer p {
   font-style: italic;
 }
 
+.premium-teaser__taste {
+  background: var(--surface-sunk);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  margin: 0 0 1.25rem;
+}
+
+.premium-teaser__taste-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--subtle);
+  margin-bottom: 0.5rem;
+}
+
+.premium-teaser__taste-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  padding: 0.3rem 0.6rem;
+}
+
+.premium-teaser__taste-prefix {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.premium-teaser__taste input {
+  width: 6ch;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--sl-text-base);
+  font-weight: 600;
+}
+
+.premium-teaser__taste input:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.premium-teaser__taste-figure {
+  display: block;
+  margin-top: 0.6rem;
+  color: var(--ink);
+  font-size: var(--sl-text-base);
+}
+
+.premium-teaser__taste-figure:empty {
+  display: none;
+}
+
 .premium-teaser__secondary {
   margin: 0 0 1rem;
   font-size: var(--sl-text-base);

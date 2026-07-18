@@ -3,9 +3,11 @@
 // The `sample` text is hand-authored teaser copy — it never un-strips premium MDX,
 // so no paid content leaks and the sync/build/strip pipeline stays untouched.
 //
-// The Unlock CTA points to a single central pricing/upgrade page. That destination lives
-// in one shared module so the in-chapter CTA and the exported manifest never drift.
-import { PREMIUM_CTA_URL } from "../data/premium-pairings.mjs";
+// The Unlock CTA deep-links to the specific paired workbook via a single shared helper, so
+// the in-chapter CTA and the exported manifest never drift and the destination stays
+// single-sourced. The workbook slug is resolved from the title authored inline in each
+// chapter, so chapters need not repeat the slug.
+import { premiumCtaUrl, workbookSlugForTitle } from "../data/premium-pairings.mjs";
 
 interface Props {
   workbookTitle: string;
@@ -16,9 +18,19 @@ interface Props {
 }
 
 const { workbookTitle, bridgeLine, bullets, sample, secondary } = Astro.props;
+
+const workbookSlug = workbookSlugForTitle(workbookTitle);
+const ctaHref = premiumCtaUrl(workbookSlug);
+// Chapter slug for conversion analytics — derived from the URL so chapters need no extra prop.
+const chapter = Astro.url.pathname.replace(/^\/book\//, "").replace(/\/$/, "") || "index";
 ---
 
-<aside class="premium-teaser" aria-label={`Premium workbook: ${workbookTitle}`}>
+<aside
+  class="premium-teaser"
+  aria-label={`Premium workbook: ${workbookTitle}`}
+  data-chapter={chapter}
+  data-workbook={workbookSlug}
+>
   <span class="premium-teaser__badge">🔒 Premium Workbook</span>
   <h3 class="premium-teaser__title">{workbookTitle}</h3>
   <p class="premium-teaser__bridge">{bridgeLine}</p>
@@ -32,9 +44,34 @@ const { workbookTitle, bridgeLine, bullets, sample, secondary } = Astro.props;
     <p>{sample.text}</p>
   </div>
 
+  <div class="premium-teaser__taste" hidden>
+    <label class="premium-teaser__taste-label" for={`teaser-bill-${workbookSlug}`}>
+      See what's at stake — enter your monthly electric bill:
+    </label>
+    <div class="premium-teaser__taste-row">
+      <span class="premium-teaser__taste-prefix" aria-hidden="true">$</span>
+      <input
+        id={`teaser-bill-${workbookSlug}`}
+        data-teaser-bill
+        type="number"
+        inputmode="numeric"
+        min="0"
+        step="10"
+        placeholder="200"
+      />
+    </div>
+    <output data-teaser-figure class="premium-teaser__taste-figure"></output>
+  </div>
+
   {secondary && <p class="premium-teaser__secondary">{secondary}</p>}
 
-  <a class="premium-teaser__cta" href={PREMIUM_CTA_URL}>
+  <a class="premium-teaser__cta" href={ctaHref}>
     Unlock the workbook <span aria-hidden="true">→</span>
   </a>
 </aside>
+
+<script>
+  import { initPremiumTeasers } from "@solarpower101/visualization";
+
+  initPremiumTeasers();
+</script>
