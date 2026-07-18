@@ -36,7 +36,7 @@ jobs:
         with:
           repository: solarpower101/solarpower101-visualization
           path: solarpower101-visualization
-          token: ${{ secrets.PLATFORM_REPO_TOKEN }}
+          token: ${{ secrets.VISUALIZATION_REPO_TOKEN || secrets.PLATFORM_REPO_TOKEN }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
