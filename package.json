@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@astrojs/starlight": "^0.41.3",
+    "@solarpower101/visualization": "file:../solarpower101-visualization",
     "astro": "^7.1.0"
   }
 }

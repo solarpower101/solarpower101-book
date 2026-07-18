@@ -1,0 +1,89 @@
+---
+title: Why Solar, Why Now
+slug: why-solar-why-now
+access: free
+summary: Connect electricity prices, solar costs, demand growth, and hotter weather to the practical timing question behind a home solar decision.
+category: energy-outlook
+last_verified_at: 2026-07-18
+sidebar:
+  order: 1
+---
+
+import EnergyOutlookScript from "../../../components/EnergyOutlookScript.astro";
+
+Electricity prices, home solar prices, electricity use, and hotter weather are moving at the same time. Use this dashboard to connect public data to the homeowner decision: what is electricity likely to cost, what does solar actually offset, and why does timing matter more in a hotter, more electric world?
+
+## Modern Energy Outlook
+
+<div class="energy-outlook" id="energy-outlook-lab">
+  <div class="outlook-toolbar" aria-label="Choose energy outlook metric">
+    <button type="button" data-outlook-metric="price" aria-pressed="true">Electricity cost</button>
+    <button type="button" data-outlook-metric="solar" aria-pressed="false">Solar panel cost</button>
+    <button type="button" data-outlook-metric="demand" aria-pressed="false">Electricity use</button>
+    <button type="button" data-outlook-metric="temperature" aria-pressed="false">Temperature</button>
+  </div>
+  <div class="outlook-grid">
+    <div class="outlook-panel">
+      <div class="outlook-chart-header">
+        <strong data-outlook-tooltip>Home electricity price | cents per kWh</strong>
+        <div class="outlook-legend" data-outlook-legend></div>
+      </div>
+      <div class="outlook-chart" data-outlook-chart></div>
+      <p class="outlook-source" data-outlook-source></p>
+    </div>
+    <div class="outlook-panel impact-panel">
+      <strong>What it means for a modern home</strong>
+      <div class="impact-controls">
+        <label>
+          <span class="control-label">Monthly use</span>
+          <input id="monthly-kwh" type="range" min="350" max="2200" step="50" value="900" />
+          <span id="monthly-kwh-value">900 kWh</span>
+        </label>
+        <label>
+          <span class="control-label">Solar energy offset</span>
+          <input id="solar-offset" type="range" min="20" max="110" step="5" value="70" />
+          <span id="solar-offset-value">70%</span>
+        </label>
+      </div>
+      <div class="impact-bar" data-impact-bar role="img" aria-label="Solar offset share of annual energy charges">
+        <span class="impact-bar-fill"></span>
+      </div>
+      <div class="impact-cards">
+        <div class="impact-card">
+          <span>Annual usage</span>
+          <strong id="impact-usage">10,800 kWh/year</strong>
+        </div>
+        <div class="impact-card">
+          <span>Energy-charge exposure</span>
+          <strong id="impact-spend">$1,868/year</strong>
+        </div>
+        <div class="impact-card is-positive">
+          <span>Gross solar offset value</span>
+          <strong id="impact-offset">$1,308/year</strong>
+        </div>
+        <div class="impact-card">
+          <span>Net grid energy charges</span>
+          <strong id="impact-net">$560/year</strong>
+        </div>
+      </div>
+      <p class="impact-rate" data-impact-rate>Modeled at the latest U.S. average home electricity rate. Your utility rate, fixed charges, and net-metering rules change the real number.</p>
+      <p data-outlook-insight>Home electricity has become materially more expensive since 2021, so bill math should use current rates and fixed charges instead of old rules of thumb.</p>
+    </div>
+  </div>
+  <div class="outlook-footnotes">
+    <span>Electricity prices: EIA Electric Power Annual table 2.10 (2014-2024); 2025 preliminary from EIA Electric Power Monthly.</span>
+    <span>Solar cost benchmarks: DOE/NREL U.S. solar system cost benchmark series through 2024, shown as dollars per watt of panel capacity.</span>
+    <span>Electricity use outlook: EIA Annual Energy Outlook 2026 growth outlook, shown as percent change from 2025.</span>
+    <span>Temperature: NOAA/NCEI global annual temperature reports (2014-2025).</span>
+  </div>
+</div>
+
+## How To Use This
+
+Treat the chart as context, not a quote. The useful homeowner question is whether your current bill, utility rules, roof, and project price make solar valuable enough for your goals.
+
+## Next Action
+
+Use the calculator with your approximate monthly kWh and a realistic solar offset, then continue with the product-facing lesson at [why solar, why now](https://solarpower101.github.io/learn/why-solar-why-now/) or [request a SolarPower101 review](https://solarpower101.github.io/#inquiry-form-title).
+
+<EnergyOutlookScript />

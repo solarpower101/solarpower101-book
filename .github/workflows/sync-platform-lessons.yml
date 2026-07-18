@@ -31,6 +31,13 @@ jobs:
         with:
           path: book
 
+      - name: Checkout visualization dependency
+        uses: actions/checkout@v4
+        with:
+          repository: solarpower101/solarpower101-visualization
+          path: solarpower101-visualization
+          token: ${{ secrets.PLATFORM_REPO_TOKEN }}
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -64,7 +71,6 @@ jobs:
 
       - name: Copy built book pages
         run: |
-          find book/dist -type f -name "*.js" -delete
           rm -rf "platform/$PLATFORM_BOOK_OUTPUT_PATH"
           mkdir -p "platform/$PLATFORM_BOOK_OUTPUT_PATH"
           cp -R book/dist/. "platform/$PLATFORM_BOOK_OUTPUT_PATH/"
