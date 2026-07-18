@@ -1,6 +1,8 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
+import { makePremiumTeaser } from "../src/data/premium-pairings.mjs";
+
 export const repoRoot = process.cwd();
 export const freeLessonsDir = path.join(repoRoot, "src", "content", "docs", "free");
 export const premiumWorkflowsDir = path.join(repoRoot, "src", "content", "docs", "premium");
@@ -83,7 +85,7 @@ export async function readPremiumWorkflow(slug) {
 }
 
 export function makeLessonIndexEntry(frontmatter) {
-  return {
+  const entry = {
     slug: frontmatter.slug,
     title: frontmatter.title,
     summary: frontmatter.summary,
@@ -94,4 +96,11 @@ export function makeLessonIndexEntry(frontmatter) {
     platformPath: `/learn/${frontmatter.slug}/`,
     platformUrl: `https://solarpower101.github.io/learn/${frontmatter.slug}/`,
   };
+
+  const premiumTeaser = makePremiumTeaser(frontmatter.slug);
+  if (premiumTeaser) {
+    entry.premiumTeaser = premiumTeaser;
+  }
+
+  return entry;
 }

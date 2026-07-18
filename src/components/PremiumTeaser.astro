@@ -1,0 +1,40 @@
+---
+// Contextual premium-workbook teaser shown at the end of a free chapter.
+// The `sample` text is hand-authored teaser copy — it never un-strips premium MDX,
+// so no paid content leaks and the sync/build/strip pipeline stays untouched.
+//
+// The Unlock CTA points to a single central pricing/upgrade page. That destination lives
+// in one shared module so the in-chapter CTA and the exported manifest never drift.
+import { PREMIUM_CTA_URL } from "../data/premium-pairings.mjs";
+
+interface Props {
+  workbookTitle: string;
+  bridgeLine: string;
+  bullets: string[];
+  sample: { label: string; text: string };
+  secondary?: string;
+}
+
+const { workbookTitle, bridgeLine, bullets, sample, secondary } = Astro.props;
+---
+
+<aside class="premium-teaser" aria-label={`Premium workbook: ${workbookTitle}`}>
+  <span class="premium-teaser__badge">🔒 Premium Workbook</span>
+  <h3 class="premium-teaser__title">{workbookTitle}</h3>
+  <p class="premium-teaser__bridge">{bridgeLine}</p>
+
+  <ul class="premium-teaser__unlock">
+    {bullets.map((b) => <li>{b}</li>)}
+  </ul>
+
+  <div class="premium-teaser__sample">
+    <span class="premium-teaser__sample-label">{sample.label}</span>
+    <p>{sample.text}</p>
+  </div>
+
+  {secondary && <p class="premium-teaser__secondary">{secondary}</p>}
+
+  <a class="premium-teaser__cta" href={PREMIUM_CTA_URL}>
+    Unlock the workbook <span aria-hidden="true">→</span>
+  </a>
+</aside>

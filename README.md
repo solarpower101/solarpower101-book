@@ -34,8 +34,30 @@ Every public lesson exports:
 - `last_verified_at`
 - a stable platform URL: `https://solarpower101.github.io/learn/{slug}/`
 - a book URL path: `/book/{slug}/`
+- a `premiumTeaser` object (for lessons with a configured pairing) so the platform catalog
+  can render a matching upgrade card — see [Premium Conversion](#premium-conversion)
 
 The exported manifest is the only data the platform should consume directly. Full MDX chapters, animations, visualizations, and video metadata should stay in this repository unless they are intentionally exposed through a versioned manifest.
+
+## Premium Conversion
+
+Each free chapter ends with a `<PremiumTeaser>` (`src/components/PremiumTeaser.astro`) that
+converts the reader toward the paired premium workbook. The in-chapter teaser copy (bridge
+line, bullets, sample) is authored inline in each free chapter's MDX. The free → premium
+pairing map and the single upgrade destination live in one module:
+`src/data/premium-pairings.mjs`.
+
+> **CTA destination (single source):** every "Unlock" CTA — the in-chapter teaser, the index
+> value-ladder cards, and the exported `premiumTeaser.ctaUrl` — resolves from
+> `PREMIUM_CTA_URL` in `src/data/premium-pairings.mjs`. It currently points to
+> `https://solarpower101.github.io/learn/premium/`, assuming the platform serves a central
+> pricing/upgrade page there. **If the platform's upgrade page lives at a different path,
+> change that one constant** and everything else follows.
+
+The platform owns checkout, entitlement, and gating past that click. Premium MDX remains
+stripped from the public build; only the catalog-level teaser metadata (workbook title,
+one-line benefit, premium slug, CTA URL) is exposed through the manifest — no premium body
+content is published.
 
 ## GitHub Sync
 
